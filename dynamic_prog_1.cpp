@@ -60,7 +60,7 @@ void TestFibonacci()
 
 void QuizBottomUP()
 {
-    cout << "¼ýÀÚ ÀÔ·Â: ";
+    cout << "ìˆ«ìž ìž…ë ¥: ";
     int n = 0;
     cin >> n;
 
