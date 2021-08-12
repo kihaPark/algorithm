@@ -1,10 +1,10 @@
 # algorithm
 
-greedy
-dfs_bfs
-sort
-binary_search
-dynamic_prog
-shortest_path
-graph
+greedy <br>
+dfs_bfs <br>
+sort <br>
+binary_search <br>
+dynamic_prog <br>
+shortest_path <br>
+graph <br>
 math
