@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <stack>
 #include <queue>
 #include <array>
@@ -69,8 +69,8 @@ int FactorialRecursive(int n) {
 
 void TestFactorial()
 {
-    cout << "¹Ýº¹ÀûÀ¸·Î ±¸Çö:" << FactorialIterative(5) << endl;
-    cout << "Àç±ÍÀûÀ¸·Î ±¸Çö:" << FactorialRecursive(5) << endl;
+    cout << "ë°˜ë³µì ìœ¼ë¡œ êµ¬í˜„:" << FactorialIterative(5) << endl;
+    cout << "ìž¬ê·€ì ìœ¼ë¡œ êµ¬í˜„:" << FactorialRecursive(5) << endl;
 }
 
 
@@ -84,8 +84,8 @@ void TestAdjacencyMatrix()
         {5, INF, 0}
     };
 
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 3; ++j) {
             cout << graph[i][j] << ' ';
         }
         cout << endl;
@@ -101,7 +101,7 @@ void TestAdjacencyList()
     graph[1].push_back({ 0, 7 }); // node 1
     graph[2].push_back({ 0, 5 }); // node 2
 
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 3; ++i) {
         for (auto& node : graph[i]) {
             cout << '(' << node.first << ',' << node.second << ')' << ' ';
         }
@@ -201,8 +201,8 @@ void TestDfs_Ex()
     /*int size_x, size_y;
     cin >> size_x >> size_y;
 
-    for (int i = 0; i < size_x; i++) {
-        for (int j = 0; j < size_y; j++) {
+    for (int i = 0; i < size_x; ++i) {
+        for (int j = 0; j < size_y; ++j) {
             cin >> graph_ex[i][j];
         }
     }*/
@@ -291,3 +291,4 @@ int main()
 
     return 0;
 }
+

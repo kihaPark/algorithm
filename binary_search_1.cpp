@@ -1,4 +1,4 @@
-#include <iostream>
+Ôªø#include <iostream>
 #include <algorithm>
 #include <vector>
 #include <string>
@@ -24,13 +24,13 @@ int SequantialSearch(string& target, vector<string>& data)
 void TestSequantialSearch()
 {
     vector<string> data = {
-        "∞°", "≥™", "¥Ÿ", "∂Û", "∏∂", "πŸ"
+        "Í∞Ä", "ÎÇò", "Îã§", "Îùº", "Îßà", "Î∞î"
     };
 
     for (string& d : data)
         cout << d << ' ';
 
-    cout << endl <<"√£¿ª πÆ¿⁄ø≠ ¿‘∑¬: ";
+    cout << endl <<"Ï∞æÏùÑ Î¨∏ÏûêÏó¥ ÏûÖÎ†•: ";
 
     string target;
     cin >> target;
@@ -77,7 +77,7 @@ void TestBinarySearch()
 
     for (int num : data)
         cout << num << ' ';
-    cout << endl << "º˝¿⁄ ¿‘∑¬: ";
+    cout << endl << "Ïà´Ïûê ÏûÖÎ†•: ";
 
     int target;
     cin >> target;

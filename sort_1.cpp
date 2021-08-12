@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 
 
 // tested x64, c++17
@@ -136,7 +136,7 @@ void TestCountingSort()
     for (int i = 0; i < size; ++i)
         counting[data[i]] += 1;
 
-    // ±»ÀÌ ´©Àû½ÃÄÑ¼­ Ã³¸®ÇÒ ÇÊ¿ä°¡ ÀÖÀ»±î?
+    // êµ³ì´ ëˆ„ì ì‹œì¼œì„œ ì²˜ë¦¬í•  í•„ìš”ê°€ ìžˆì„ê¹Œ?
     for (int i = 1; i <= max_value; ++i)
         counting[i] += counting[i - 1];
 

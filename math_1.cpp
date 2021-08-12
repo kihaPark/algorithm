@@ -20,6 +20,7 @@ void TestPrimeNumber()
 {
     const int MAX_CNT = 5;
     array<int, MAX_CNT> nums = { 4, 7, 10, 11, 13 };
+
     for (int num : nums)
         cout << num << (IsPrimeNumber(num) ? " : prime num" : " : X") << endl;
 }

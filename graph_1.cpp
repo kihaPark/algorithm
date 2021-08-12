@@ -276,7 +276,6 @@ void QuizCurriculumPlan()
     }
 
     cout << endl << "quiz curriculum: ";
-
     for (int node : result)
         cout << node << ' ';
 }

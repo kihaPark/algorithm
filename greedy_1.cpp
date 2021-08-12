@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <array>
 
 
@@ -6,9 +6,9 @@
 
 using namespace std;
 
-void greedy_1()
+void TestGreedy1()
 {
-    // °Å½º¸§µ· ÃÖ¼Ò °³¼ö ±¸ÇÏ±â
+    // ê±°ìŠ¤ë¦„ëˆ ìµœì†Œ ê°œìˆ˜ êµ¬í•˜ê¸°
     int change = 1260;
     int count = 0;
     array<int, 4> coins = { 500, 100, 50, 10 };
@@ -24,7 +24,8 @@ void greedy_1()
 
 int main()
 {
-    greedy_1();
+    TestGreedy1();
 
     return 0;
 }
+
