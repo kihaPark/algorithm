@@ -3,6 +3,7 @@
 #include <queue>
 #include <array>
 #include <vector>
+#include <set>
 
 
 // tested x64, c++17
@@ -278,6 +279,104 @@ void TestBfs_Ex()
 }
 
 
+// lowest common ancestor
+const int MAX_NODE = 31;
+const int MAX_EXPONENT = 11;
+
+vector<int> graph_lca[MAX_NODE];
+set<int> nodes_lca;
+
+// 2^0, 2^1, 2^2 ~ 2^(MAX_EXPONENT-1) => 1, 2, 4, 8 ~
+// node's 1, 2, 4, 8 ~ upper depth parent
+int parent_lca[MAX_NODE][MAX_EXPONENT] = { 0, };
+int depth_lca[MAX_NODE] = { 0, };
+bool visited_lca[MAX_NODE] = { false, };
+
+void InitData_LCA()
+{
+    vector<pair<int, int>> edges = {
+        { 0, 1 }, { 0, 2 }, { 1, 3 }, { 1, 4 },
+        { 2, 5 }, { 2, 6 }, { 3, 7 }, { 3, 8 },
+        { 4, 9 }, { 4, 10 }, { 4, 11 }, { 8, 12 },
+        { 8, 13 }, { 9, 14 }, { 10, 15 }, { 13, 16 },
+        { 13, 17 }, { 14, 18 }, { 15, 19 }, { 17, 20 }
+    };
+
+    for (auto [fir, sec] : edges) {
+        //cout << fir << ", " << sec << endl;
+        graph_lca[fir].push_back(sec);
+        graph_lca[sec].push_back(fir);
+        nodes_lca.insert(fir);
+        nodes_lca.insert(sec);
+    }
+
+    fill(&parent_lca[0][0], &parent_lca[0][0] + MAX_NODE * MAX_EXPONENT, -1);
+    fill(depth_lca, depth_lca + MAX_NODE, -1);
+}
+
+void DFS_LCA(int node, int dep)
+{
+    visited_lca[node] = true;
+    depth_lca[node] = dep;
+
+    for (int next : graph_lca[node]) {
+        if (visited_lca[next])
+            continue;
+
+        parent_lca[next][0] = node;
+        DFS_LCA(next, dep + 1);
+    }
+}
+
+void SetParent_LCA()
+{
+    DFS_LCA(0, 0);
+
+    for (int exp = 1; exp < MAX_EXPONENT; ++exp) {
+        for (int node = 0; node < nodes_lca.size(); ++node) {
+            int close_parent = parent_lca[node][exp - 1];
+            parent_lca[node][exp] = parent_lca[close_parent][exp - 1];
+        }
+    }
+}
+
+int LCA(int a, int b)
+{
+    if (depth_lca[a] > depth_lca[b])
+        swap(a, b);
+
+    for (int exp = MAX_EXPONENT - 1; exp >= 0; --exp) {
+        if (depth_lca[b] - depth_lca[a] >= (1 << exp))
+            b = parent_lca[b][exp];
+    }
+
+    if (a == b)
+        return a;
+
+    for (int exp = MAX_EXPONENT - 1; exp >= 0; --exp) {
+        if (parent_lca[a][exp] == parent_lca[b][exp])
+            continue;
+
+        a = parent_lca[a][exp];
+        b = parent_lca[b][exp];
+    }
+
+    return parent_lca[a][0];
+}
+
+void TestLca()
+{
+    InitData_LCA();
+    SetParent_LCA();
+
+    cout << "5, 7 LCA: " << LCA(5, 7) << endl;
+    cout << "15, 20 LCA: " << LCA(15, 20) << endl;
+    cout << "16, 17 LCA: " << LCA(16, 17) << endl;
+    cout << "10, 9 LCA: " << LCA(10, 9) << endl;
+    cout << "20, 8 LCA: " << LCA(20, 8) << endl;
+}
+
+
 int main()
 {
     TestStack();
@@ -288,6 +387,7 @@ int main()
     TestDfsBfs();
     TestDfs_Ex();
     TestBfs_Ex();
+    TestLca();
 
     return 0;
 }

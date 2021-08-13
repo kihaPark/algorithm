@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <vector>
 
 
 // tested x64, c++17
@@ -24,9 +25,8 @@ void TestSelectionSort()
     }
 
     cout << "selection sort: ";
-    for (int i = 0; i < size; ++i) {
+    for (int i = 0; i < size; ++i)
         cout << data[i] << ' ';
-    }
 }
 
 
@@ -45,9 +45,8 @@ void TestInsertionSort()
     }
 
     cout << endl << "insertion sort: ";
-    for (int i = 0; i < size; ++i) {
+    for (int i = 0; i < size; ++i)
         cout << data[i] << ' ';
-    }
 }
 
 
@@ -118,9 +117,8 @@ void TestQuickSort()
     //QuickSort2(data, 0, size - 1);
 
     cout << endl << "quick sort: ";
-    for (int i = 0; i < size; ++i) {
+    for (int i = 0; i < size; ++i)
         cout << data[i] << ' ';
-    }
 }
 
 
@@ -151,12 +149,83 @@ void TestCountingSort()
 }
 
 
+void MakeHeap1(int* data, int size)
+{
+    // kind of complete binary tree
+    // max heap, loose sorted, root begin index 1
+    // parent node value >= child node value
+    // parent index = child index / 2
+    // left child index = parent index * 2
+    // right child index = parent index * 2 + 1
+
+    for (int i = 1; i < size; ++i) {
+        int child = i;
+
+        do {
+            // this case: root begin index 0, left child index 1
+            int root = (child - 1) / 2;
+
+            if (data[root] < data[child])
+                swap(data[root], data[child]);
+
+            child = root;
+        } while (child != 0);
+    }
+}
+
+void MakeHeap2(int* data, int size)
+{
+    // this case: root begin index 0
+    for (int root = (size - 1) / 2; root >= 0; --root) {
+        int child = root * 2 + 1; // left child index
+
+        if (child < (size - 1) && data[child] < data[child + 1])
+            child += 1;
+
+        if (data[root] < data[child])
+            swap(data[root], data[child]);
+    }
+}
+
+void TestHeapSort()
+{
+    const int size = 10;
+    int data[size] = { 7, 5, 9, 0, 3, 1, 6, 2, 4, 8 };
+
+    //MakeHeap1(data, size);
+    MakeHeap2(data, size);
+
+    for (int end = size - 1; end >= 0; --end) {
+        int root = 0, child = 1;
+        swap(data[root], data[end]);
+
+        do {
+            // this case: root begin index 0, left child index 1
+            child = root * 2 + 1;
+
+            if (child < end - 1 && data[child] < data[child + 1])
+                child += 1;
+
+            if (child < end && data[root] < data[child])
+                swap(data[root], data[child]);
+
+            root = child;
+        } while (child < end);
+    }
+
+    cout << endl << "heap sort: ";
+    for (int i = 0; i < size; ++i)
+        cout << data[i] << ' ';
+}
+
+
 int main()
 {
     TestSelectionSort();
     TestInsertionSort();
     TestQuickSort();
     TestCountingSort();
+    TestHeapSort();
 
     return 0;
 }
